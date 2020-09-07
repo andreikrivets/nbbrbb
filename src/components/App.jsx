@@ -9,7 +9,6 @@ const App = () => {
   const [value, setValue] = useState(0);
   const [stat, setStat] = useState({});
   const [data, setData] = useState({});
-
   const ids = [145, 292, 298];
 
   const fetchData = async (val) => {
@@ -21,7 +20,13 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchData(0);
+    const fetchInitial = async () => {
+      const req = await getCurrentRates(145);
+      const dyn = await getCurrencyDynamics(145);
+      setData(req);
+      setStat(dyn);
+    };
+    fetchInitial();
   }, []);
 
   const handleChange = (event, newValue) => {
@@ -50,4 +55,3 @@ const App = () => {
 };
 
 export default App;
-// style={{ display: "flex", justifyContent: "center" }}
