@@ -1,20 +1,21 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Typography, CircularProgress } from "@material-ui/core";
+
+import ChartSection from "./chart";
 
 const Page = ({ data, stat }) => {
   if (!data.Cur_OfficialRate)
     return <CircularProgress style={{ marginLeft: "50%", marginTop: "2%" }} />;
   const multipler = data.Cur_Scale;
   const date = new Date(data.Date).toDateString();
-  // const str = `${date.getDate()}${date.getMonth()}`;
+
   return (
     <section
       style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop: "2%"
+        marginTop: "2%",
       }}
     >
       <Typography variant="h4" color="primary">
@@ -23,6 +24,7 @@ const Page = ({ data, stat }) => {
         } = ${data.Cur_OfficialRate.toFixed(2)} BYN`}
       </Typography>
       <Typography variant="subtitle1">{date}</Typography>
+      <ChartSection stat={stat} abbr={data.Cur_Abbreviation} />
     </section>
   );
 };

@@ -12,7 +12,7 @@ const App = () => {
 
   const ids = [145, 292, 298];
 
-  const fetchData = async val => {
+  const fetchData = async (val) => {
     const id = ids[val];
     const req = await getCurrentRates(id);
     const dyn = await getCurrencyDynamics(id);
@@ -30,7 +30,7 @@ const App = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <Paper>
         <Tabs
           value={value}
@@ -41,7 +41,7 @@ const App = () => {
         >
           <Tab label="USD" />
           <Tab label="EUR" />
-          <Tab label="RUR" />
+          <Tab label="RUB" />
         </Tabs>
         <Page data={data} stat={stat} />
       </Paper>
