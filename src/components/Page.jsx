@@ -15,7 +15,7 @@ const Page = ({ data, stat }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop: "2%",
+        marginTop: "5%",
       }}
     >
       <Typography variant="h4" color="primary">
