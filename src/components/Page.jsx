@@ -3,9 +3,9 @@ import { Typography, CircularProgress } from "@material-ui/core";
 
 import ChartSection from "./chart";
 
-const Page = ({ data, stat }) => {
-  if (!data.Cur_OfficialRate)
-    return <CircularProgress style={{ marginLeft: "50%", marginTop: "2%" }} />;
+const Page = ({ data, stat, isLoading }) => {
+  if (!data.Cur_OfficialRate || isLoading)
+    return <CircularProgress style={{ marginLeft: "50%", marginTop: "5%" }} />;
   const multipler = data.Cur_Scale;
   const date = new Date(data.Date).toDateString();
 

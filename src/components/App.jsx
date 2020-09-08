@@ -9,30 +9,24 @@ const App = () => {
   const [value, setValue] = useState(0);
   const [stat, setStat] = useState({});
   const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const ids = [145, 292, 298];
   const mobile = useMediaQuery("(max-width:600px)");
 
-  const fetchData = async (val) => {
-    const id = ids[val];
-    const req = await getCurrentRates(id);
-    const dyn = await getCurrencyDynamics(id);
-    setData(req);
-    setStat(dyn);
+  const fetchData = async (id) => {
+    setIsLoading(true);
+    await getCurrentRates(id).then((req) => setData(req));
+    await getCurrencyDynamics(id).then((dyn) => setStat(dyn));
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    const fetchInitial = async () => {
-      const req = await getCurrentRates(145);
-      const dyn = await getCurrencyDynamics(145);
-      setData(req);
-      setStat(dyn);
-    };
-    fetchInitial();
+    fetchData(145);
   }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    fetchData(newValue);
+    fetchData(ids[newValue]);
   };
 
   return (
@@ -49,7 +43,7 @@ const App = () => {
           <Tab label="EUR" />
           <Tab label="RUB" />
         </Tabs>
-        <Page data={data} stat={stat} />
+        <Page data={data} stat={stat} isLoading={isLoading} />
       </Paper>
     </Container>
   );
