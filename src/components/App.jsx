@@ -21,10 +21,14 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchData(145);
+    const initCurrency = localStorage.getItem("id") || 145;
+    setValue(+localStorage.getItem("value") || 0);
+    fetchData(initCurrency);
   }, []);
 
   const handleChange = (event, newValue) => {
+    localStorage.setItem("id", ids[newValue]);
+    localStorage.setItem("value", newValue);
     setValue(newValue);
     fetchData(ids[newValue]);
   };
