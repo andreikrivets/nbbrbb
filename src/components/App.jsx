@@ -37,8 +37,13 @@ const App = () => {
   };
 
   const handleDateChange = (e) => {
-    fetchData(localStorage.getItem("id"), e.target.value);
-    setDate(e.target.value);
+    if (e.target.value) {
+      setDate(e.target.value);
+      fetchData(
+        localStorage.getItem("id"),
+        e.target.value ? e.target.value : currentDate()
+      );
+    }
   };
 
   return (

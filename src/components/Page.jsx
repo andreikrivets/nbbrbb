@@ -3,7 +3,8 @@ import { Typography, CircularProgress, TextField } from "@material-ui/core";
 
 import ChartSection from "./chart";
 
-const Page = ({ data, stat, isLoading, setDate }) => {
+const Page = (props) => {
+  const { data, stat, isLoading, setDate } = props;
   if (!data.Cur_OfficialRate || isLoading)
     return <CircularProgress style={{ marginLeft: "50%", marginTop: "5%" }} />;
   const multipler = data.Cur_Scale;
